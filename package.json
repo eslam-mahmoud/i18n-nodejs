@@ -1,0 +1,20 @@
+{
+  "name": "i18n-nodejs",
+  "version": "1.2.0",
+  "description": "Internationalization localization package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "internationalization",
+    "localization",
+    "i18n",
+    "translation"
+  ],
+  "author": "Eslam Mahmoud <contact@eslam.me> (http://eslam.me)",
+  "license": "MIT",
+  "dependencies": {
+    "mustache": "^2.2.1"
+  }
+}
