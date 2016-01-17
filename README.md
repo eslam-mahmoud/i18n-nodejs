@@ -60,7 +60,7 @@ If the text has `variable` that need to be translated you should add the the tex
 }
 ```
 ```js
-//indes.js file
+//index.js file
 var config = {
 	"lang": "ar",
 	"langFile": "./../../locale.json"//relative path to index.js file of i18n-nodejs module
