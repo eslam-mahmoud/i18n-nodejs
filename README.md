@@ -53,6 +53,9 @@ If the text has `variable` that need to be translated you should add the the tex
 {
 	"Welcome {{name}}": {
 		"ar": "مرحبا {{name}}"
+	},
+	"eslam": {
+		"ar": "اسلام"
 	}
 }
 ```
