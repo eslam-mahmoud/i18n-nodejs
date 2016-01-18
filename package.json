@@ -16,5 +16,12 @@
   "license": "MIT",
   "dependencies": {
     "mustache": "^2.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/eslam-mahmoud/i18n-nodejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eslam-mahmoud/i18n-nodejs/issues"
   }
 }
