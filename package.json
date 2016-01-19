@@ -10,7 +10,8 @@
     "internationalization",
     "localization",
     "i18n",
-    "translation"
+    "translation",
+    "i18n-nodejs"
   ],
   "author": "Eslam Mahmoud <contact@eslam.me> (http://eslam.me)",
   "license": "MIT",
