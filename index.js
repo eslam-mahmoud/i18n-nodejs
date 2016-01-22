@@ -1,4 +1,3 @@
-var Mustache = require('mustache');
 var _lang = null;
 var _filePath = null;//"../../locale.json";
 var _locale = null;
@@ -269,7 +268,7 @@ module.exports = function(lang, filePath) {
 
 						//translate the word if was passed in the values var
 						if (typeof values[match_word] != "undefined" ) {
-							translation.replace(match, values[match_word]);
+							translation = translation.replace(match, values[match_word]);
 							continue;//move to the next word in the loop
 						}
 
@@ -278,6 +277,7 @@ module.exports = function(lang, filePath) {
 							var temp_array = match_word.split("||");
 							//update the matched word
 							match_word = temp_array[0];
+							console.log("match_word updated", match_word);
 							//get the variable of the count for the word
 							var item_count_variable = temp_array[1];
 							console.log("item_count_variable", item_count_variable);
@@ -292,20 +292,21 @@ module.exports = function(lang, filePath) {
 							console.log("rule", rule);
 
 							if (typeof _locale[match_word][_lang] == "object") {
-								translation.replace(match, _locale[match_word][_lang][rule]);
+								translation = translation.replace(match, _locale[match_word][_lang][rule]);
+							} else {
+								translation = translation.replace(match, _locale[match_word][_lang]);
 							}
 						} else {
 							if (typeof values == "object") {
-								translation.replace(match, values[match_word]);
+								translation = translation.replace(match, values[match_word]);
 							} else {
-
+								translation = translation.replace(match, _locale[match_word][_lang]);
 							}
-							//TODO CHECK IF MACHED WORD IN THE VALUES 
-							translation.replace(match, _locale[match_word][_lang]);
 						}
 					}//end of for
 			}//END OF IF 
+			console.log('translation', translation);
 			return translation;
-		}
+		}//END OF function __()
 	}
 }
