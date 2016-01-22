@@ -246,66 +246,59 @@ module.exports = function(lang, filePath) {
 	return {
 		//translation function
 		__ : function(string, values) {
-			console.log('string', string);
-			console.log('values', values);
 			//return translation of the original sting if did not find the translation
 			var translation = string;
+			//get the corresponding translation from the file
 			if (typeof _locale[string] != "undefined" && typeof _locale[string][_lang] != "undefined") {
 				translation = _locale[string][_lang];
 			}
-			//If user sent values to be rendered into the string
+
 			//If the string have place to render values withen
-			// if (values && (/{{.*}}/).test(translation)) {
 			if ((/{{.+?}}/g).test(translation)) {
-					var matches = translation.match(/{{.+?}}/g);
-					console.log("matches", matches);
-					for (var index in matches) {
-						//get the match {{example}}
-						var match = matches[index];
-						//get the word in the match example
-						var match_word = (match.replace('}}', '')).replace('{{', '');
-						console.log("match_word", match_word);
+				//get all the parts needed to be replaced
+				var matches = translation.match(/{{.+?}}/g);
+				//loop on each match
+				for (var index in matches) {
+					//get the match {{example}}
+					var match = matches[index];
+					//get the word in the match example
+					var match_word = (match.replace('}}', '')).replace('{{', '');
 
-						//translate the word if was passed in the values var
-						if (typeof values[match_word] != "undefined" ) {
-							translation = translation.replace(match, values[match_word]);
-							continue;//move to the next word in the loop
-						}
+					//translate the word if was passed in the values var
+					if (values && typeof values[match_word] != "undefined" ) {
+						translation = translation.replace(match, values[match_word]);
+						continue;//move to the next word in the loop
+					}
 
-						//if the matched word have a count
-						if ((/\|\|.+/g).test(match_word)) {
-							var temp_array = match_word.split("||");
-							//update the matched word
-							match_word = temp_array[0];
-							console.log("match_word updated", match_word);
-							//get the variable of the count for the word
-							var item_count_variable = temp_array[1];
-							console.log("item_count_variable", item_count_variable);
+					//if the matched word have a count
+					if ((/\|\|.+/g).test(match_word)) {
+						var temp_array = match_word.split("||");
+						//update the matched word
+						match_word = temp_array[0];
+						//get the variable of the count for the word
+						var item_count_variable = temp_array[1];
 
-							//get the value form values passed to this function
-							//TODO through error if not found in values
-							var item_count = values[item_count_variable];
-							console.log("item_count", item_count);
+						//get the value form values passed to this function
+						//TODO through error if not found in values
+						var item_count = values[item_count_variable];
 
-							//will get the rule or for pluralization based on the lang
-							var rule = get_rule(item_count, _lang);
-							console.log("rule", rule);
+						//will get the rule or for pluralization based on the lang
+						var rule = get_rule(item_count, _lang);
 
-							if (typeof _locale[match_word][_lang] == "object") {
-								translation = translation.replace(match, _locale[match_word][_lang][rule]);
-							} else {
-								translation = translation.replace(match, _locale[match_word][_lang]);
-							}
+						if (typeof _locale[match_word][_lang] == "object") {
+							translation = translation.replace(match, _locale[match_word][_lang][rule]);
 						} else {
-							if (typeof values == "object") {
-								translation = translation.replace(match, values[match_word]);
-							} else {
-								translation = translation.replace(match, _locale[match_word][_lang]);
-							}
+							translation = translation.replace(match, _locale[match_word][_lang]);
 						}
-					}//end of for
+					} else {
+						if (typeof values == "object") {
+							translation = translation.replace(match, values[match_word]);
+						} else {
+							translation = translation.replace(match, _locale[match_word][_lang]);
+						}
+					}
+				}//end of for
 			}//END OF IF 
-			console.log('translation', translation);
 			return translation;
 		}//END OF function __()
 	}
