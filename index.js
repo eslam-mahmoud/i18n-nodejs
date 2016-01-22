@@ -254,33 +254,50 @@ module.exports = function(lang, filePath) {
 			}
 			//If user sent values to be rendered into the string
 			//If the string have place to render values withen
-			if (values && (/{{.*}}/).test(translation)) {
-				if (values == true) {
+			// if (values && (/{{.*}}/).test(translation)) {
+			if ((/{{.+?}}/g).test(translation)) {
 					var matches = translation.match(/{{.+?}}/g);
-					console.log(matches);
+					console.log("matches", matches);
 					for (var index in matches) {
 						//get the match {{example}}
 						var match = matches[index];
 						//get the word in the match example
 						var match_word = (match.replace('}}', '')).replace('{{', '');
-						console.log(match_word);
+						console.log("match_word", match_word);
 
-						//get if
-						var item_count = match_word.match(/\|[0-9]/);
-						console.log(item_count);
-						if (item_count && item_count[0]) {
-							item_count = (item_count[0]).replace('|', '');
-							//will get the rule or for pluralization pased on the lang
-							var rule = get_rule(item_count, _lang);
+						//translate the word if was passed in the values var
+						if (typeof values[match_word] != "undefined" ) {
+							translation.replace(match, values[match_word]);
+							continue;//move to the next word in the loop
 						}
-						
-						// translation.replace(match, _locale[match_word][_lang]);
-					}
-				} else {
-					//render the named values into the translated||original text
-					translation = Mustache.render(translation, values);
-				}
-			}
+
+						//if the matched word have a count
+						if ((/\|\|.+/g).test(match_word)) {
+							var temp_array = match_word.split("||");
+							//update the matched word
+							match_word = temp_array[0];
+							//get the variable of the count for the word
+							var item_count_variable = temp_array[1];
+							console.log("item_count_variable", item_count_variable);
+
+							//get the value form values passed to this function
+							//TODO through error if not found in values
+							var item_count = values[item_count_variable];
+							console.log("item_count", item_count);
+
+							//will get the rule or for pluralization based on the lang
+							var rule = get_rule(item_count, _lang);
+							console.log("rule", rule);
+
+							if (typeof _locale[match_word][_lang] == "object") {
+								translation.replace(match, _locale[match_word][_lang][rule]);
+							}
+						} else {
+							//TODO CHECK IF MACHED WORD IN THE VALUES 
+							translation.replace(match, _locale[match_word][_lang]);
+						}
+					}//end of for
+			}//END OF IF 
 			return translation;
 		}
 	}
