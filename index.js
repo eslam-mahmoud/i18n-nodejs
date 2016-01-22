@@ -268,6 +268,10 @@ module.exports = function(lang, filePath) {
 					if (values && typeof values[match_word] != "undefined" ) {
 						translation = translation.replace(match, values[match_word]);
 						continue;//move to the next word in the loop
+					} else if (typeof _locale[match_word] != "undefined" && typeof _locale[match_word][_lang] != "undefined") {
+						//If the translation is there in the file then translate it directly
+						translation = translation.replace(match, _locale[match_word][_lang]);
+						continue;//move to the next word in the loop
 					}
 
 					//if the matched word have a count
