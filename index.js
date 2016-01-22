@@ -247,6 +247,8 @@ module.exports = function(lang, filePath) {
 	return {
 		//translation function
 		__ : function(string, values) {
+			console.log('string', string);
+			console.log('values', values);
 			//return translation of the original sting if did not find the translation
 			var translation = string;
 			if (typeof _locale[string] != "undefined" && typeof _locale[string][_lang] != "undefined") {
@@ -293,6 +295,11 @@ module.exports = function(lang, filePath) {
 								translation.replace(match, _locale[match_word][_lang][rule]);
 							}
 						} else {
+							if (typeof values == "object") {
+								translation.replace(match, values[match_word]);
+							} else {
+
+							}
 							//TODO CHECK IF MACHED WORD IN THE VALUES 
 							translation.replace(match, _locale[match_word][_lang]);
 						}
