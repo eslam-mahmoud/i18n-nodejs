@@ -76,7 +76,56 @@ If you do not want to write the tranlation directly in your code (wich you shoul
 console.log(i18n.__("Welcome {{name}}", {name: i18n.__("eslam")}));
 // output => 'مرحبا اسلام'
 ```
+## Version 2.0.0
+## Pluralization
+Starting form version `2.0.0` we now support pluralization, First let us describe the problem let say we want to display "Hi Eslam, you have 555 points", but if you want to display that text in arabic the word "points" will have 5 different possibilities to be rendered in as it is the rule in Arabic language in case of plural each of them depend on the number before the word.
+
+So instesd of writing it as 
+```js
+//this is worng
+"Hi {{name}}, you have {{points_count}} points"
+```
+You should pass the count to the variable as `{{var||var_count}}`
+```js
+i18n.__(
+    "Hi {{name}}, you have {{points_count}} {{points||points_count}}", {   
+        name: i18n.__("eslam"), 
+        points_count: 555
+    }
+```
+As you see we passed the variable `name` aslo we passed the `points_count` in two places
+- where we want it to be displayed
+- where we need to handle the pluralization after `||`
+
+The translation file should be 
+```js
+{
+    "Hello {{name}}, you have {{points_count}} {{points||points_count}}": {
+		"ar":  "مرحبا {{name}}, لديك {{points_count}} {{points||points_count}}"
+	},
+	"eslam": {
+		"ar": "اسلام"
+	},
+	"points": {
+		"ar": {
+			"0": "نقاط",
+			"1": "نقطة",
+			"2": "نقطتين",
+			"3": "نقاط",
+			"4": "نقطة",
+			"5": "نقطة"
+		}
+	}
+}
+```
+You can find all the rules in [this localization guide](http://localization-guide.readthedocs.org/en/latest/l10n/pluralforms.html)
+
+There is a note also as you can see we did not submit the `points` variable in the values object as second param for `__(string, values object)` because now the module is smarter and will look first for the translation in the values param then if it is not there will look for it in the file set in the constructor
+
+## Summary of updates
+-Version 2.0.0 support pluralization, remove the dependency to other packages to make it even simpler and light for your app and if you passed any values for any variable in the second param it will overwrite the original value in the translation file.
 
 ## Links
+- [pluralization rules guide](http://localization-guide.readthedocs.org/en/latest/l10n/pluralforms.html)
 - [Bug Report](https://github.com/eslam-mahmoud/i18n-nodejs/issues)
 - [Author: Eslam Mahmoud](https://eslam.me)
