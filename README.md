@@ -10,6 +10,8 @@ npm install i18n-nodejs --save
 
 ## Usage
 
+### Old/Deprecated
+
 ```js
 var config = {
 	"lang": "ar",
@@ -17,6 +19,18 @@ var config = {
 }
 //init internationalization / localization class
 var i18n = require('i18n-nodejs')(config.lang, config.langFile);
+console.log(i18n.__('Welcome')); // output => 'اهلا'
+```
+### New
+
+```js
+var config = {
+	"lang": "ar",
+	"langFile": "./../../locale.json"//relative path to index.js file of i18n-nodejs module
+}
+//init internationalization / localization class
+var i18n_module = require('i18n-nodejs');
+var i18n = new i18n_module(config.lang, config.langFile);
 console.log(i18n.__('Welcome')); // output => 'اهلا'
 ```
 
@@ -66,7 +80,8 @@ var config = {
 	"langFile": "./../../locale.json"//relative path to index.js file of i18n-nodejs module
 }
 //init internationalization / localization class
-var i18n = require('i18n-nodejs')(config.lang, config.langFile);
+var i18n_module = require('i18n-nodejs');
+var i18n = new i18n_module(config.lang, config.langFile);
 console.log(i18n.__("Welcome {{name}}", {name: "اسلام"}));
 // output => 'مرحبا اسلام'
 ```
@@ -76,6 +91,21 @@ If you do not want to write the translation directly in your code (which you sho
 console.log(i18n.__("Welcome {{name}}", {name: i18n.__("eslam")}));
 // output => 'مرحبا اسلام'
 ```
+
+## Version 3.0.0
+Changed how the module was constructed now uses class format, so you must user `new i18n()` in the contruction of the class.
+```js
+var config = {
+	"lang": "ar",
+	"langFile": "./../../locale.json"//relative path to index.js file of i18n-nodejs module
+}
+//init internationalization / localization class
+var i18n_module = require('i18n-nodejs');
+var i18n = new i18n_module(config.lang, config.langFile);
+console.log(i18n.__('Welcome')); // output => 'اهلا'
+```
+
+
 ## Version 2.0.0
 ## Pluralization
 Starting form version `2.0.0` we now support pluralization, First let us describe the problem let say we want to display "Hi Eslam, you have 555 points", but if you want to display that text in arabic the word "points" will have 5 different possibilities to be rendered in as it is the rule in Arabic language in case of plural each of them depend on the number before the word.
@@ -124,6 +154,7 @@ There is a note also as you can see we did not submit the `points` variable in t
 
 ## Summary of updates
 - Version 2.0.0 support pluralization, remove the dependency to other packages to make it even simpler and light for your app and if you passed any values for any variable in the second param it will overwrite the original value in the translation file.
+- Version 3.0.0 Changed how the module was constructed now uses class format, so you must user `new i18n()` in the contruction of the class.
 
 ## Links
 - [pluralization rules guide](http://localization-guide.readthedocs.org/en/latest/l10n/pluralforms.html)
