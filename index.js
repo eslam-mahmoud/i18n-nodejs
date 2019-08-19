@@ -254,6 +254,7 @@ class I18n {
 			for (var index in matches) {
 				//get the match {{example}}
 				var match = matches[index];
+				if(typeof(match) !== "string") continue
 				//get the word in the match example
 				var match_word = (match.replace('}}', '')).replace('{{', '');
 
