@@ -245,9 +245,10 @@ class I18n {
 		if (typeof this._locale[string] != "undefined" && typeof this._locale[string][this._lang] != "undefined") {
 			translation = this._locale[string][this._lang];
 		}
-
+		if (typeof(translation) === "object") translation = translation.join('\n')
 		//If the string have place to render values withen
 		if ((/{{.+?}}/g).test(translation)) {
+			
 			//get all the parts needed to be replaced
 			var matches = translation.match(/{{.+?}}/g);
 			//loop on each match

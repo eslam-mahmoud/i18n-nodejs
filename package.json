@@ -1,6 +1,6 @@
 {
-  "name": "i18n-nodejs",
-  "version": "2.0.0",
+  "name": "i18n-nodejs-v2",
+  "version": "2.0.3",
   "description": "Internationalization localization package",
   "main": "index.js",
   "scripts": {
@@ -14,13 +14,13 @@
     "i18n-nodejs",
     "plural"
   ],
-  "author": "Eslam Mahmoud <contact@eslam.me> (http://eslam.me)",
+  "author": "Alberto Monterroso",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/eslam-mahmoud/i18n-nodejs.git"
+    "url": "git://github.com/Albermonte/i18n-nodejs.git"
   },
   "bugs": {
-    "url": "https://github.com/eslam-mahmoud/i18n-nodejs/issues"
+    "url": "https://github.com/Albermonte/i18n-nodejs/issues"
   }
 }
