@@ -1,11 +1,11 @@
-# i18n-nodejs
+# i18n-nodejs-v2
 
 i18n module for node, out of frustration with over complicated modules for translation & localization, I created this module with simplicity in mind.
 
 ## Install
 
 ```shell
-npm install i18n-nodejs --save
+npm install i18n-nodejs-v2 --save
 ```
 
 ## Usage
@@ -15,10 +15,10 @@ npm install i18n-nodejs --save
 ```js
 var config = {
 	"lang": "ar",
-	"langFile": "./../../locale.json"//relative path to index.js file of i18n-nodejs module
+	"langFile": "./../../locale.json"//relative path to index.js file of i18n-nodejs-v2 module
 }
 //init internationalization / localization class
-var i18n = require('i18n-nodejs')(config.lang, config.langFile);
+var i18n = require('i18n-nodejs-v2')(config.lang, config.langFile);
 console.log(i18n.__('Welcome')); // output => 'اهلا'
 ```
 ### New
@@ -26,10 +26,10 @@ console.log(i18n.__('Welcome')); // output => 'اهلا'
 ```js
 var config = {
 	"lang": "ar",
-	"langFile": "./../../locale.json"//relative path to index.js file of i18n-nodejs module
+	"langFile": "./../../locale.json"//relative path to index.js file of i18n-nodejs-v2 module
 }
 //init internationalization / localization class
-var i18n_module = require('i18n-nodejs');
+var i18n_module = require('i18n-nodejs-v2');
 var i18n = new i18n_module(config.lang, config.langFile);
 console.log(i18n.__('Welcome')); // output => 'اهلا'
 ```
@@ -77,10 +77,10 @@ If the text has `variable` that need to be translated you should add the the tex
 //index.js file
 var config = {
 	"lang": "ar",
-	"langFile": "./../../locale.json"//relative path to index.js file of i18n-nodejs module
+	"langFile": "./../../locale.json"//relative path to index.js file of i18n-nodejs-v2 module
 }
 //init internationalization / localization class
-var i18n_module = require('i18n-nodejs');
+var i18n_module = require('i18n-nodejs-v2');
 var i18n = new i18n_module(config.lang, config.langFile);
 console.log(i18n.__("Welcome {{name}}", {name: "اسلام"}));
 // output => 'مرحبا اسلام'
@@ -97,10 +97,10 @@ Changed how the module was constructed now uses class format, so you must user `
 ```js
 var config = {
 	"lang": "ar",
-	"langFile": "./../../locale.json"//relative path to index.js file of i18n-nodejs module
+	"langFile": "./../../locale.json"//relative path to index.js file of i18n-nodejs-v2 module
 }
 //init internationalization / localization class
-var i18n_module = require('i18n-nodejs');
+var i18n_module = require('i18n-nodejs-v2');
 var i18n = new i18n_module(config.lang, config.langFile);
 console.log(i18n.__('Welcome')); // output => 'اهلا'
 ```
@@ -158,5 +158,3 @@ There is a note also as you can see we did not submit the `points` variable in t
 
 ## Links
 - [pluralization rules guide](http://localization-guide.readthedocs.org/en/latest/l10n/pluralforms.html)
-- [Bug Report](https://github.com/eslam-mahmoud/i18n-nodejs/issues)
-- [Author: Eslam Mahmoud](https://eslam.me)
