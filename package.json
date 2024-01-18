@@ -1,6 +1,6 @@
 {
   "name": "i18n-nodejs",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Internationalization localization package",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "i18n-nodejs",
     "plural"
   ],
-  "author": "Eslam Mahmoud <contact@eslam.me> (http://eslam.me)",
+  "author": "Eslam Mahmoud <@eslam_mahmoud>",
   "license": "MIT",
   "repository": {
     "type": "git",
