@@ -248,8 +248,8 @@ class I18n {
 		var translation = string;
 
 		//get the corresponding translation from the file
-		if (typeof this._locale[string] != "undefined" && typeof this._locale[string][this._lang] != "undefined") {
-			translation = this._locale[string][this._lang];
+		if (typeof this._locale[string] != "undefined" && typeof this._locale[string][lang] != "undefined") {
+			translation = this._locale[string][lang];
 		}
 
 		//If the string have place to render values withen
@@ -267,9 +267,9 @@ class I18n {
 				if (values && typeof values[match_word] != "undefined") {
 					translation = translation.replace(match, values[match_word]);
 					continue;//move to the next word in the loop
-				} else if (typeof this._locale[match_word] != "undefined" && typeof this._locale[match_word][this._lang] != "undefined") {
+				} else if (typeof this._locale[match_word] != "undefined" && typeof this._locale[match_word][lang] != "undefined") {
 					//If the translation is there in the file then translate it directly
-					translation = translation.replace(match, this._locale[match_word][this._lang]);
+					translation = translation.replace(match, this._locale[match_word][lang]);
 					continue;//move to the next word in the loop
 				}
 
@@ -286,18 +286,18 @@ class I18n {
 					var item_count = values[item_count_variable];
 
 					//will get the rule or for pluralization based on the lang
-					var rule = this.get_rule(item_count, this._lang);
+					var rule = this.get_rule(item_count, lang);
 
-					if (typeof this._locale[match_word][this._lang] == "object") {
-						translation = translation.replace(match, this._locale[match_word][this._lang][rule]);
+					if (typeof this._locale[match_word][lang] == "object") {
+						translation = translation.replace(match, this._locale[match_word][lang][rule]);
 					} else {
-						translation = translation.replace(match, this._locale[match_word][this._lang]);
+						translation = translation.replace(match, this._locale[match_word][lang]);
 					}
 				} else {
 					if (typeof values == "object") {
 						translation = translation.replace(match, values[match_word]);
 					} else {
-						translation = translation.replace(match, this._locale[match_word][this._lang]);
+						translation = translation.replace(match, this._locale[match_word][lang]);
 					}
 				}
 			}//end of for
