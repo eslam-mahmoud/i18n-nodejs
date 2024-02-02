@@ -1,6 +1,6 @@
 {
   "name": "i18n-nodejs",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Internationalization localization package",
   "main": "index.js",
   "scripts": {
